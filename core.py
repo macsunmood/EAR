@@ -80,7 +80,7 @@ def load_models(models_urls, models_dir='models'):
 		for i, m_url in enumerate(models_urls):
 			model_file = os.path.join(models_dir, f'model_{i}.h5')
 			if not Path(model_file).exists():
-				with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+				with st.spinner("Downloading model... this may take a while! \n Don't stop!"):
 					# Download the file from Google Drive
 					gdown.download(m_url, model_file, quiet=False)
 

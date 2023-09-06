@@ -6,7 +6,7 @@ gdown
 
 yt-dlp
 ffmpeg-python
-pyaudio
+# pyaudio
 SpeechRecognition
 pydub
 librosa
