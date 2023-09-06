@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib==3.7.2
+tensorflow
+
+yt-dlp
+ffmpeg-python
+pyaudio
+SpeechRecognition
+pydub
+librosa
