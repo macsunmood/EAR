@@ -17,11 +17,16 @@ import speech_recognition as sr
 ### APP UI
 ###
 
+models_urls = [
+    'https://drive.google.com/uc?id=1BYuU3Qp3Y7eL6wVANJsdFL8oOAua3U7a',
+    'https://drive.google.com/uc?id=1NHHLwCKDKuesTAUtKsYQ7Z8koCVh-1RF'
+]
+
 
 st.set_page_config('English Accent Recognizer 🌎', '🗣️')
 
 # Load pretrained models and start new tensorflow session
-session, MODELS = load_models()
+session, MODELS = load_models(models_urls)
 
 sndsrc_help = '''
 Select the **Sound Source** and then

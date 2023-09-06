@@ -3,8 +3,10 @@ import streamlit as st
 from utils import *
 
 import os
+from pathlib import Path
 import joblib
 import numpy as np
+import gdown
 
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -64,22 +66,32 @@ def get_acc_dict(model):
 
 
 @st.cache_resource
-def load_models(models_dir='models/'):
+def load_models(models_urls, models_dir='models'):
 	'''Load pretrained models'''
 	# Open a new TensorFlow session
 	config = tf.compat.v1.ConfigProto(allow_soft_placement=True)
 	session = tf.compat.v1.Session(config=config)
 	with session.as_default():
 		models = {}
-		for m in get_models_list(models_dir):
-			if m.split('.')[-1] == 'joblib':
-				model = joblib.load(m)
-			elif m.split('.')[-1] == 'h5':
+		save_dest = Path(models_dir)
+		save_dest.mkdir(exist_ok=True)
+
+		# for m in get_models_list(models_dir):
+		for i, m_url in enumerate(models_urls):
+			model_file = os.path.join(models_dir, f'model_{i}.h5')
+			if not Path(model_file).exists():
+				with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+					# Download the file from Google Drive
+					gdown.download(m_url, model_file, quiet=False)
+
+			# if m.split('.')[-1] == 'joblib':
+			# 	model = joblib.load(m)
+			# elif m.split('.')[-1] == 'h5':
+			if os.path.splitext(model_file)[-1] == '.h5':
 				try:
-					model = load_model(m, custom_objects={'Info': Info, 
-														  'AccentsInfo': AccentsInfo})
+					model = load_model(model_file, custom_objects={'Info': Info, 'AccentsInfo': AccentsInfo})
 				except:
-					model = load_model(m)
+					model = load_model(model_file)
 
 			if not hasattr(model, 'accents_dict'):
 				try:
