@@ -126,7 +126,7 @@ def get_features(y, duration=5, sr=SAMPLE_RATE):
     # WAVE PLOT
     axes[0].set_title(f'Wave Plot for audio sample at {sr} hz')
     axes[0].set_facecolor('#B4E8CF')
-    lbd.waveshow(y, sr, color='#4300FF', ax=axes[0])
+    lbd.waveshow(y, sr=sr, color='#4300FF', ax=axes[0])
 
     # MELSPEC
     melspec = librosa.feature.melspectrogram(y, sr)
