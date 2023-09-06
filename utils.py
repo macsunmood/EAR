@@ -129,7 +129,7 @@ def get_features(y, duration=5, sr=SAMPLE_RATE):
     lbd.waveshow(y, sr=sr, color='#4300FF', ax=axes[0])
 
     # MELSPEC
-    melspec = librosa.feature.melspectrogram(y, sr)
+    melspec = librosa.feature.melspectrogram(y=y, sr=sr)
     melspec = librosa.power_to_db(np.abs(melspec), ref=np.max)
     axes[1].set_title(f'Mel Spectogram | shape: {melspec.shape}')
     lbd.specshow(melspec, cmap='viridis', y_axis='mel', x_axis='time', ax=axes[1])
