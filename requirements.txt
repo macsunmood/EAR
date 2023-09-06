@@ -1,4 +1,5 @@
-numpy==1.24
+numba
+numpy==1.24.0
 pandas
 matplotlib==3.7.2
 tensorflow
